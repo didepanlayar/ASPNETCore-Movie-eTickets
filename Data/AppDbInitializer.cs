@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
-using Movie_eTickets.Controllers.Data.Enums;
+using Movie_eTickets.Data.Enums;
 using Movie_eTickets.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Movie_eTickets.Controllers.Data
+namespace Movie_eTickets.Data
 {
     public class AppDbInitializer
     {

@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Movie_eTickets.Models;
 
-namespace Movie_eTickets.Controllers.Data
+namespace Movie_eTickets.Data
 {
-    public class AppDbContext:DbContext
+    public class AppDbContext : DbContext
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-            
+
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
