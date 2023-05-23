@@ -43,6 +43,10 @@
 
 @section Scripts{
     <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ShowProfilePicturURL');
+            output.src = $("#ProfilePictureURL").val();
+        })
         $("#ProfilePictureURL").on("change", function () {
             var output = document.getElementById('ShowProfilePicturURL');
             output.src = $(this).val();
