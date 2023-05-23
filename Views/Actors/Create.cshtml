@@ -1,0 +1,51 @@
+﻿@model Actor
+
+@{
+    ViewData["Title"] = "Add a New Actor";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Add a New Actor</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Create">
+                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                    <div class="form-group text-center">
+                        <img class="border-info rounded-circle" style="max-width: 150px" id="ShowProfilePicturURL" />
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="ProfilePictureURL"></label>
+                        <input class="form-control" asp-for="ProfilePictureURL" />
+                        <span class="text-danger" asp-validation-for="ProfilePictureURL"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="FullName"></label>
+                        <input class="form-control" asp-for="FullName" />
+                        <span class="text-danger" asp-validation-for="FullName"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Bio"></label>
+                        <input class="form-control" asp-for="Bio" />
+                        <span class="text-danger" asp-validation-for="Bio"></span>
+                    </div>
+                    <div class="form-group">
+                        <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
+                        <input class="btn btn-outline-success float-right" type="submit" value="Create" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $("#ProfilePictureURL").on("change", function () {
+            var output = document.getElementById('ShowProfilePicturURL');
+            output.src = $(this).val();
+        })
+    </script>
+}
