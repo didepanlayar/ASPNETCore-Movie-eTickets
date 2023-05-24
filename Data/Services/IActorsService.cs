@@ -13,7 +13,7 @@ namespace Movie_eTickets.Data.Services
         // Add Actor to Database
         Task AddAsync(Actor actor);
         // Update Actor to Database
-        Actor Update(int id, Actor newActor);
+        Task<Actor> UpdateAsync(int id, Actor newActor);
         // Delete Actor from Database
         void Delete(int id);
     }
