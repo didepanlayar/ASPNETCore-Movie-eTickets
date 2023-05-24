@@ -14,7 +14,7 @@ namespace Movie_eTickets.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var data = await _service.GetAll();
+            var data = await _service.GetAllAsync();
             return View(data);
         }
         // Get: Actors/Create
@@ -29,8 +29,15 @@ namespace Movie_eTickets.Controllers
             {
                 return View(actor);
             }
-            _service.add(actor);
+            await _service.AddAsync(actor);
             return RedirectToAction(nameof(Index));
+        }
+        // Get: Actors/Details/{id}
+        public async Task<IActionResult> Details(int id)
+        {
+            var actorDetails = await _service.GetByIdAsync(id);
+            if (actorDetails == null) return View("NotFound");
+            return View(actorDetails);
         }
     }
 }
