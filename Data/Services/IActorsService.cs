@@ -7,11 +7,11 @@ namespace Movie_eTickets.Data.Services
     public interface IActorsService
     {
         // Get All Actor
-        Task<IEnumerable<Actor>> GetAll();
+        Task<IEnumerable<Actor>> GetAllAsync();
         // Get Actor by ID
-        Actor GetById(int id);
+        Task<Actor> GetByIdAsync(int id);
         // Add Actor to Database
-        void add(Actor actor);
+        Task AddAsync(Actor actor);
         // Update Actor to Database
         Actor Update(int id, Actor newActor);
         // Delete Actor from Database
