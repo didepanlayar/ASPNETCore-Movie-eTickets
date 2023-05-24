@@ -1,0 +1,51 @@
+﻿@model Actor
+
+@{
+    ViewData["Title"] = "Delete Actor";
+}
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <p>
+            <h1>Delete Actor for @Model.FullName</h1>
+        </p>
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <div class="form-group text-center">
+                    <img class="border-info rounded-circle" style="max-width: 150px" id="ShowProfilePicturURL" />
+                </div>
+                <div class="form-group">
+                    <label class="control-label" asp-for="ProfilePictureURL"></label>
+                    <input class="form-control" asp-for="ProfilePictureURL" readonly />
+                    <span class="text-danger" asp-validation-for="ProfilePictureURL"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" asp-for="FullName"></label>
+                    <input class="form-control" asp-for="FullName" readonly />
+                    <span class="text-danger" asp-validation-for="FullName"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" asp-for="Bio"></label>
+                    <input class="form-control" asp-for="Bio" readonly />
+                    <span class="text-danger" asp-validation-for="Bio"></span>
+                </div>
+                <div class="form-group">
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="Id" />
+                        <input class="btn btn-danger float-right" type="submit" value="Confirm" />
+                    </form>
+                    <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ShowProfilePicturURL');
+            output.src = $("#ProfilePictureURL").val();
+        })
+    </script>
+}
