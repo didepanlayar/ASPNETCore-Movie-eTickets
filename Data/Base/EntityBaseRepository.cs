@@ -1,33 +1,35 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Movie_eTickets.Data.Base
 {
     public class EntityBaseRepository<T> : IEntityBaseRepository<T> where T : class, IEntityBase, new()
     {
-        public Task AddAsync(T entity)
+        private readonly AppDbContext _context;
+
+        public EntityBaseRepository(AppDbContext context)
         {
-            throw new System.NotImplementedException();
+            _context = context;
+        }
+        public async Task AddAsync(T entity) => await _context.Set<T>().AddAsync(entity);
+
+        public async Task DeleteAsync(int id)
+        {
+            var entity = await _context.Set<T>().FirstOrDefaultAsync(n => n.Id == id);
+            EntityEntry entityState = _context.Entry<T>(entity);
+            entityState.State = EntityState.Deleted;
         }
 
-        public Task DeleteAsync(int id)
-        {
-            throw new System.NotImplementedException();
-        }
+        public async Task<IEnumerable<T>> GetAllAsync() => await _context.Set<T>().ToListAsync();
 
-        public Task<IEnumerable<T>> GetAllAsync()
-        {
-            throw new System.NotImplementedException();
-        }
+        public async Task<T> GetByIdAsync(int id) => await _context.Set<T>().FirstOrDefaultAsync(n => n.Id == id);
 
-        public Task<T> GetByIdAsync(int id)
+        public async Task UpdateAsync(int id, T entity)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<T> UpdateAsync(int id, T entity)
-        {
-            throw new System.NotImplementedException();
+            EntityEntry entityState = _context.Entry<T>(entity);
+            entityState.State = EntityState.Modified;
         }
     }
 }
