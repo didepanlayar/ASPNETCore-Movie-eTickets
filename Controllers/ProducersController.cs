@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Movie_eTickets.Data.Services;
+using Movie_eTickets.Models;
 using System.Threading.Tasks;
 
 namespace Movie_eTickets.Controllers
@@ -15,6 +16,21 @@ namespace Movie_eTickets.Controllers
         {
             var allProducers = await _service.GetAllAsync();
             return View(allProducers);
+        }
+        // Get: Producers/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("ProfilePictureURL, FullName, Bio")] Producer producer)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(producer);
+            }
+            await _service.AddAsync(producer);
+            return RedirectToAction(nameof(Index));
         }
         // Get: Producers/Details/{id}
         public async Task<IActionResult> Details(int id)
