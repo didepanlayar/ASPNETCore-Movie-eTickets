@@ -3,7 +3,7 @@ using Movie_eTickets.Models;
 
 namespace Movie_eTickets.Data.Services
 {
-    public interface MoviesService : EntityBaseRepository<Movie>, IMoviesService
+    public class MoviesService : EntityBaseRepository<Movie>, IMoviesService
     {
         public MoviesService(AppDbContext context) : base(context) {}
     }
