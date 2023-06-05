@@ -39,6 +39,5 @@
         </table>
     </div>
 </div>
-<div class="text-white" style="position: fixed; right: 25px; bottom: 25px;">
-    <a class="btn btn-success" asp-action="Create"><i class="bi bi-plus-circle"></i> Add New</a>
-</div>
+
+@await Html.PartialAsync("_CreateItem", "Cinemas")
