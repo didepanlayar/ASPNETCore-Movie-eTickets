@@ -1,4 +1,5 @@
 ﻿@model NewMovieVM
+@using Movie_eTickets.Data.Enums;
 
 @{
     ViewData["Title"] = "Create a New Movies";
@@ -44,17 +45,28 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label" asp-for="CinemaId"></label>
-                                <select class="form-control" asp-for="CinemaId"></select>
+                                <select class="form-control" asp-for="CinemaId" asp-items="ViewBag.Cinemas">
+                                    <option value="">Select Cinema</option>
+                                </select>
                                 <span class="text-danger" asp-validation-for="CinemaId"></span>
                             </div>
                             <div class="form-group">
                                 <label class="control-label" asp-for="MovieCategory"></label>
-                                <select class="form-control" asp-for="MovieCategory"></select>
+                                <select class="form-control" asp-for="MovieCategory" asp-items="Html.GetEnumSelectList<MovieCategory>()">
+                                    <option value="">Select Category</option>
+                                </select>
                                 <span class="text-danger" asp-validation-for="MovieCategory"></span>
                             </div>
                             <div class="form-group">
+                                <label class="control-label" asp-for="ProducerId"></label>
+                                <select class="form-control" asp-for="ProducerId" asp-items="ViewBag.Producers">
+                                    <option value="">Select Producer</option>
+                                </select>
+                                <span class="text-danger" asp-validation-for="ProducerId"></span>
+                            </div>
+                            <div class="form-group">
                                 <label class="control-label" asp-for="ActorIds"></label>
-                                <select class="form-control" asp-for="ActorIds" multiple></select>
+                                <select class="form-control" asp-for="ActorIds" asp-items="ViewBag.Actors" multiple></select>
                                 <span class="text-danger" asp-validation-for="ActorIds"></span>
                             </div>
                         </div>
