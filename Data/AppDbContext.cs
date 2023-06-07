@@ -31,5 +31,10 @@ namespace Movie_eTickets.Data
         // > Update-Database
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
+        // Shopping Cart Realted Tables
+        // Package Manager Console:
+        // > Add-Migration ShoppingCartItems
+        // > Update-Database
+        public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
     }
 }
