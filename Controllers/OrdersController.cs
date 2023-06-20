@@ -2,6 +2,7 @@
 using Movie_eTickets.Data.Cart;
 using Movie_eTickets.Data.Services;
 using Movie_eTickets.Data.ViewModels;
+using System.Threading.Tasks;
 
 namespace Movie_eTickets.Controllers
 {
@@ -24,6 +25,15 @@ namespace Movie_eTickets.Controllers
                 ShoppingCartTotal = _shoppingCart.GetShoppingCartTotal()
             };
             return View(response);
+        }
+        public async Task<RedirectToActionResult> AddItemToShoppingCart(int id)
+        {
+            var item = await _moviesService.GetMovieByIdAsync(id);
+            if(item != null)
+            {
+                _shoppingCart.AddItemToCart(item);
+            }
+            return RedirectToAction(nameof(ShoppingCart));
         }
     }
 }

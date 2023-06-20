@@ -35,6 +35,7 @@ namespace Movie_eTickets.Data.Cart
             {
                 shoppingCartItem = new ShoppingCartItem()
                 {
+                    ShoppingCartId = ShoppingCartId,
                     Movie = movie,
                     Amount = 1
                 };
