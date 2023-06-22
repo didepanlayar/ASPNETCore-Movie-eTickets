@@ -17,6 +17,12 @@ namespace Movie_eTickets.Controllers
             _shoppingCart = shoppingCart;
             _ordersService = ordersService;
         }
+        public async Task<IActionResult> index()
+        {
+            string userId = "";
+            var orders = await _ordersService.GetOrdersByUserIdAsync(userId);
+            return View(orders);
+        }
         public IActionResult ShoppingCart()
         {
             var items = _shoppingCart.GetShoppingCartItems();
