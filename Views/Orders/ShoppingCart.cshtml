@@ -98,7 +98,10 @@
             },
             // Execute Payment
             onAuthorize: function(data, actions) {
-                console.log("Execute Payment.");
+                return actions.payment.execute().then(function() {
+                    var url = '@Url.Action("CompleteOrder", "Orders", new{})';
+                    window.location.href = url;
+                });
             }
         }, '#button-paypal');
     </script>
