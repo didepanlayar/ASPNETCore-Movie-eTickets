@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -8,6 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Movie_eTickets.Data;
 using Movie_eTickets.Data.Cart;
 using Movie_eTickets.Data.Services;
+using Movie_eTickets.Models;
 
 namespace Movie_eTickets
 {
@@ -34,7 +37,12 @@ namespace Movie_eTickets
             services.AddScoped<IOrdersService, OrdersService>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+
+            // Authentication and Authorization
+            services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddMemoryCache();
             services.AddSession();
+            services.AddAuthentication(options => {options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;});
 
             services.AddControllersWithViews();
         }
@@ -57,6 +65,10 @@ namespace Movie_eTickets
 
             app.UseRouting();
             app.UseSession();
+
+            // Authentication and Authorization
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseAuthorization();
 
