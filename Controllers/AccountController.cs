@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Movie_eTickets.Data;
+using Movie_eTickets.Data.ViewModels;
 using Movie_eTickets.Models;
 
 namespace Movie_eTickets.Controllers
@@ -16,9 +17,6 @@ namespace Movie_eTickets.Controllers
             _signInManager = signInManager;
             _context = context;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
+        public IActionResult Login() => View(new LoginVM());
     }
 }
