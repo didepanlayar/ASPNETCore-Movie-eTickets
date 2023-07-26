@@ -1,0 +1,50 @@
+@using Movie_eTickets.Data.ViewModels;
+@model RegisterVM;
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <p>
+            <h4>Register</h4>
+        </p>
+        @if(TempData["Error"] != null) {
+            <div class="col-md-12 alert alert-danger">
+                <span><strong>Sorry!</strong> - @TempData["Error"]</span>
+            </div>
+        }
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <form asp-action="Register">
+                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="FullName"></label>
+                        <input class="form-control" asp-for="FullName">
+                        <span class="text-danger" asp-validation-for="FullName"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="EmailAddress"></label>
+                        <input class="form-control" asp-for="EmailAddress">
+                        <span class="text-danger" asp-validation-for="EmailAddress"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="Password"></label>
+                        <input class="form-control" asp-for="Password">
+                        <span class="text-danger" asp-validation-for="Password"></span>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" asp-for="ConfirmPassword"></label>
+                        <input class="form-control" asp-for="ConfirmPassword">
+                        <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
+                    </div>
+                    <div class="form-group">
+                        <a class="btn btn-outline-secondary" asp-controller="Movies" asp-action="Index"> Cancel</a>
+                        <input class="btn btn-outline-success float-right" type="submit" value="Register">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
