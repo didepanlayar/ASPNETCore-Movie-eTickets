@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Movie_eTickets.Data;
+using Movie_eTickets.Data.Static;
 using Movie_eTickets.Data.ViewModels;
 using Movie_eTickets.Models;
 
@@ -42,5 +43,26 @@ namespace Movie_eTickets.Controllers
             return View(loginVM);
         }
         public IActionResult Register() => View(new RegisterVM());
+        [HttpPost]
+        public async Task<IActionResult> Register(RegisterVM registerVM)
+        {
+            if (!ModelState.IsValid) return View(registerVM);
+            var user = await _userManager.FindByEmailAsync(registerVM.EmailAddress);
+            if (user != null)
+            {
+                TempData["Error"] = "This email is already in use.";
+                return View(registerVM);
+            }
+            var newUser = new ApplicationUser()
+            {
+                FullName = registerVM.FullName,
+                Email = registerVM.EmailAddress,
+                UserName = registerVM.EmailAddress
+            };
+            var newUserResponse = await _userManager.CreateAsync(newUser, registerVM.Password);
+            if (newUserResponse.Succeeded)
+                await _userManager.AddToRoleAsync(newUser, UserRoles.User);
+            return View("RegisterCompleted");
+        }
     }
 }
