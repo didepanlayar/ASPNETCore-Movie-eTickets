@@ -13,9 +13,13 @@ namespace Movie_eTickets.Data.Services
         {
             _context = context;
         }
-        public async Task<List<Order>> GetOrdersByUserIdAsync(string userId)
+        public async Task<List<Order>> GetOrdersByUserIdAndRoleAsync(string userId, string userRole)
         {
-            var orders = await _context.Orders.Include(n => n.OrderItem).ThenInclude(n => n.Movie).Where(n => n.UserId == userId).ToListAsync();
+            var orders = await _context.Orders.Include(n => n.OrderItem).ThenInclude(n => n.Movie).Include(n => n.User).ToListAsync();
+            if (userRole != "Administrator")
+            {
+                orders = orders.Where(n => n.UserId == userId).ToList();
+            }
             return orders;
         }
 
