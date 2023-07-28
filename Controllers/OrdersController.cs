@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Movie_eTickets.Data.Cart;
 using Movie_eTickets.Data.Services;
 using Movie_eTickets.Data.ViewModels;
@@ -7,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Movie_eTickets.Controllers
 {
+    [Authorize]
     public class OrdersController : Controller
     {
         private readonly IMoviesService _moviesService;
