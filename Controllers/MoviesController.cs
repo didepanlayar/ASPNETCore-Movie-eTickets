@@ -2,13 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Movie_eTickets.Data.Services;
+using Movie_eTickets.Data.Static;
 using Movie_eTickets.Models;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Movie_eTickets.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = UserRoles.Administrator)]
     public class MoviesController : Controller
     {
         private readonly IMoviesService _service;

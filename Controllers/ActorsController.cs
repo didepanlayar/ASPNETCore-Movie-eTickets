@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Movie_eTickets.Data.Services;
+using Movie_eTickets.Data.Static;
 using Movie_eTickets.Models;
 using System.Threading.Tasks;
 
 namespace Movie_eTickets.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = UserRoles.Administrator)]
     public class ActorsController : Controller
     {
         private readonly IActorsService _service;
