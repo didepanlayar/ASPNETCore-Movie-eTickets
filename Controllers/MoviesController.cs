@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Movie_eTickets.Data.Services;
 using Movie_eTickets.Data.Static;
 using Movie_eTickets.Models;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -30,7 +31,8 @@ namespace Movie_eTickets.Controllers
             var allMovies = await _service.GetAllAsync(n => n.Cinema);
             if (!string.IsNullOrEmpty(searchString))
             {
-                var filteredResult = allMovies.Where(n => n.Name.Contains(searchString) || n.Description.Contains(searchString)).ToList();
+                // var filteredResult = allMovies.Where(n => n.Name.ToLower().Contains(searchString.ToLower()) || n.Description.ToLower().Contains(searchString.ToLower())).ToList();
+                var filteredResult = allMovies.Where(n => string.Equals(n.Name, searchString, StringComparison.InvariantCultureIgnoreCase) || string.Equals(n.Description, searchString, StringComparison.InvariantCultureIgnoreCase)).ToList();
                 return View("Index", filteredResult);
             }
             return View("Index", allMovies);
